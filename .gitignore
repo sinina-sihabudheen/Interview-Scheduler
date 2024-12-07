@@ -1,0 +1,34 @@
+# Python-related files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+
+# Django-related files
+*.log
+*.pot
+*.py[cod]
+db.sqlite3
+.env
+
+# Docker-related files
+.docker/
+*.log
+
+# Virtual environment directory (if used)
+env/
+venv/
+
+# MacOS system files
+.DS_Store
+
+# JetBrains IDE files
+.idea/
+
+# VS Code settings
+.vscode/
+
+# Other sensitive or unnecessary files
+*.swp

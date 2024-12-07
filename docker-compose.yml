@@ -1,0 +1,36 @@
+# version: '3'
+
+services:
+  django:
+    build: .
+    command: >
+      sh -c "/usr/src/app/wait-for-it.sh postgres:5432 --timeout=60 -- python manage.py makemigrations &&
+          python manage.py migrate &&
+          python manage.py runserver 0.0.0.0:8000 --noreload"
+    
+    volumes:
+      - .:/usr/src/app
+
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_DB: interview_scheduler
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+
+  postgres:
+    image: postgres:14  # Updated image version
+    platform: linux/arm64
+    environment:
+      POSTGRES_DB: interview_scheduler
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
